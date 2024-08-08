@@ -37,12 +37,12 @@ local M = {}
 
 ---@type PaletteBackgrounds
 local hard_background = {
-  bg_dim = "#1e2326", --  not changed
+  bg_dim = "#282E37",
   bg0 = "#2C323B",
-  bg1 = "#3c3836",
+  bg1 = "#303740",
   bg2 = "#242a32",
   bg3 = "#665c54",
-  bg4 = "#7c6f64",
+  bg4 = "#5f575c",
   bg5 = "#7c6f64",
   bg_red = "#fb4934",
   bg_green = "#98C379",
@@ -61,11 +61,11 @@ local base_palette = {
   blue = "#83a598",
   purple = "#c678dd",
   grey0 = "#d5c4a1",
-  grey1 = "#bdae93",
+  grey1 = "#928374",
   grey2 = "#928374",
-  statusline1 = "#a7c080",
-  statusline2 = "#d3c6aa",
-  statusline3 = "#e67e80",
+  statusline1 = "#83a598",
+  statusline2 = "#8ec07c",
+  statusline3 = "#fb4934",
   none = "NONE",
 }
 

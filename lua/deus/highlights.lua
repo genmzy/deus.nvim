@@ -105,7 +105,7 @@ highlights.generate_syntax = function(palette, options)
     lCursor = { link = "Cursor" },
     CursorIM = { link = "Cursor" },
     CursorColumn = syntax_entry(palette.none, palette.bg1),
-    CursorLine = syntax_entry(palette.none, palette.bg1),
+    CursorLine = syntax_entry(palette.none, palette.bg2),
     Directory = syntax_entry(palette.green, palette.none),
     DiffAdd = syntax_entry(palette.none, palette.bg_green),
     DiffChange = syntax_entry(palette.none, palette.bg_blue),
@@ -1189,7 +1189,7 @@ highlights.generate_syntax = function(palette, options)
     TelescopeMatching = syntax_entry(palette.green, palette.none, { styles.bold }),
     TelescopeBorder = { link = "Grey" },
     TelescopePromptPrefix = { link = "Orange" },
-    TelescopeSelection = { link = "DiffAdd" },
+    TelescopeSelection = { reverse = true },
 
     -- lewis6991/gitsigns.nvim
     GitSignsAdd = { link = "GreenSign" },
@@ -1201,7 +1201,7 @@ highlights.generate_syntax = function(palette, options)
     GitSignsAddLn = { link = "DiffAdd" },
     GitSignsChangeLn = { link = "DiffChange" },
     GitSignsDeleteLn = { link = "DiffDelete" },
-    GitSignsCurrentLineBlame = { link = "Grey" },
+    GitSignsCurrentLineBlame = { link = "NonText" },
 
     -- phaazon/hop.nvim
     HopNextKey = syntax_entry(palette.orange, palette.none, { styles.bold }),
@@ -1568,7 +1568,7 @@ highlights.generate_syntax = function(palette, options)
     NeoTreeGitIgnored = { link = "Grey" },
     NeoTreeGitModified = { link = "Blue" },
     NeoTreeGitUnstaged = { link = "Purple" },
-    NeoTreeGitUntracked = { link = "Fg" },
+    NeoTreeGitUntracked = { link = "Purple" },
     NeoTreeGitStaged = { link = "Purple" },
     NeoTreeDimText = { link = "Grey" },
     NeoTreeIndentMarker = { link = "NonText" },
@@ -2101,6 +2101,13 @@ highlights.generate_syntax = function(palette, options)
     syntax["NeoTreeNormal"] = syntax_entry(palette.fg, palette.bg_dim)
     syntax["NeoTreeEndOfBuffer"] = syntax_entry(palette.bg_dim, palette.bg_dim)
     syntax["NeoTreeVertSplit"] = syntax_entry(palette.bg0, palette.bg0)
+    -- makrdown.nvim
+    syntax["RenderMarkdownH1Bg"] = syntax_entry(palette.fg, palette.bg2)
+    syntax["RenderMarkdownH2Bg"] = syntax_entry(palette.fg, palette.bg_dim)
+    syntax["RenderMarkdownH3Bg"] = syntax_entry(palette.fg, palette.bg1)
+    syntax["RenderMarkdownH4Bg"] = syntax_entry(palette.fg, palette.bg4)
+    syntax["RenderMarkdownH5Bg"] = syntax_entry(palette.fg, palette.bg3)
+    syntax["RenderMarkdownH6Bg"] = syntax_entry(palette.fg, palette.bg5)
   end
 
   if options.inlay_hints_background == "none" then
