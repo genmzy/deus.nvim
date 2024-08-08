@@ -1,0 +1,359 @@
+*deus.nvim.txt*      For Neovim >= 0.8.0     Last change: 2024 August 06
+
+==============================================================================
+Table of Contents                          *deus.nvim-table-of-contents*
+
+1. deus.nvim                           |deus.nvim-deus.nvim|
+  - Features                        |deus.nvim-deus.nvim-features|
+  - Installation                |deus.nvim-deus.nvim-installation|
+  - Usage                              |deus.nvim-deus.nvim-usage|
+  - Configuration              |deus.nvim-deus.nvim-configuration|
+  - Overriding Highlight Groups|deus.nvim-deus.nvim-overriding-highlight-groups|
+  - Overridingcolours in the palette|deus.nvim-deus.nvim-overridingcolours-in-the-palette|
+  - Plugin support            |deus.nvim-deus.nvim-plugin-support|
+  - Still TODO                    |deus.nvim-deus.nvim-still-todo|
+  - Inspiration                  |deus.nvim-deus.nvim-inspiration|
+
+==============================================================================
+1. deus.nvim                           *deus.nvim-deus.nvim*
+
+A Lua port of the deus <https://github.com/sainnhe/deus> colour
+scheme.
+
+  -----------------------------------------------------------------------
+                                   Dark                    Light
+  ----------------------- ----------------------- -----------------------
+           Hard             [deus colour       [eveforest colour
+                             scheme dark hard]      scheme light hard]
+
+     Medium (default)        [eveforest colour      [deus colour
+                            scheme dark medium]    scheme light medium]
+
+           Soft             [deus colour      [deus colour
+                             scheme dark soft]      scheme light soft]
+  -----------------------------------------------------------------------
+_All screenshots taken from my personal config_
+
+
+FEATURES                            *deus.nvim-deus.nvim-features*
+
+- 100% Lua, supports Treesitter & LSP
+- Vim terminal colours
+- **Lualine** theme
+
+
+INSTALLATION                    *deus.nvim-deus.nvim-installation*
+
+Using lazy.nvim <https://github.com/folke/lazy.nvim>
+
+>lua
+    require("lazy").setup({
+      "genmzy/deus-nvim",
+      version = false,
+      lazy = false,
+      priority = 1000, -- make sure to load this before all the other start plugins
+      -- Optional; default configuration will be used if setup isn't called.
+      config = function()
+        require("deus").setup({
+          -- Your config here
+        })
+      end,
+    })
+<
+
+Usingpacker.nvim <https://github.com/wbthomason/packer.nvim>
+
+>lua
+    use({
+      "genmzy/deus-nvim",
+      -- Optional; default configuration will be used if setup isn't called.
+      config = function()
+        require("deus").setup()
+      end,
+    })
+<
+
+Usingvim-plug <https://github.com/junegunn/vim-plug>
+
+>viml
+    Plug 'genmzy/deus-nvim', { 'branch': 'main' }
+<
+
+
+USAGE                                  *deus.nvim-deus.nvim-usage*
+
+>viml
+    " In VimL
+    
+    " This has both light & dark modes to match your background setting.
+    colorscheme deus
+<
+
+>lua
+    -- In Lua
+    vim.cmd([[colorscheme deus]])
+    
+    -- Alternatively
+    require("deus").load()
+<
+
+Toenable the deus theme for LuaLine, you can specify it as such:
+
+>lua
+    require("lualine").setup({
+      options = {
+        -- ... other configuration
+        theme = "deus", -- Can also be "auto" to detect automatically.
+      }
+    })
+<
+
+
+LSPSAGA INFORMATION ~
+
+Please note that LspSaga uses `Diagnostic{Warning,Error,Info,Hint}` highlight
+groups to define its borders for diagnostic pop-ups, especially in
+`diagnostic_jump_{next,prev}`. As discussed in the Sonokai repo
+<https://github.com/sainnhe/sonokai/issues/87>, this is not a good idea and
+there is no plan to change core highlights for one plugin.
+
+**To prevent the problem of squiggly lines in LspSaga diagnostic windows,
+please set the diagnostic.border_follow configuration option to false.**
+
+
+CONFIGURATION                  *deus.nvim-deus.nvim-configuration*
+
+
+  Configuration options aren’t as comprehensive as the original deus
+  theme yet.
+This colour scheme has a light and a dark mode which are configured using the
+vim background setting: `:set background=light` or `vim.o.background=dark` as
+appropriate.
+
+The default configuration used by the colour scheme ~
+
+>lua
+    require("deus").setup({
+      ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
+      ---Default is "medium".
+      background = "medium",
+      ---How much of the background should be transparent. 2 will have more UI
+      ---components be transparent (e.g. status line background)
+      transparent_background_level = 0,
+      ---Whether italics should be used for keywords and more.
+      italics = false,
+      ---Disable italic fonts for comments. Comments are in italics by default, set
+      ---this to `true` to make them _not_ italic!
+      disable_italic_comments = false,
+      ---By default, the colour of the sign column background is the same as the as normal text
+      ---background, but you can use a grey background by setting this to `"grey"`.
+      sign_column_background = "none",
+      ---The contrast of line numbers, indent lines, etc. Options are `"high"` or
+      ---`"low"` (default).
+      ui_contrast = "low",
+      ---Dim inactive windows. Only works in Neovim. Can look a bit weird with Telescope.
+      ---
+      ---When this option is used in conjunction with show_eob set to `false`, the
+      ---end of the buffer will only be hidden inside the active window. Inside
+      ---inactive windows, the end of buffer filler characters will be visible in
+      ---dimmed symbols. This is due to the way Vim and Neovim handle `EndOfBuffer`.
+      dim_inactive_windows = false,
+      ---Some plugins support highlighting error/warning/info/hint texts, by
+      ---default these texts are only underlined, but you can use this option to
+      ---also highlight the background of them.
+      diagnostic_text_highlight = false,
+      ---Which colour the diagnostic text should be. Options are `"grey"` or `"coloured"` (default)
+      diagnostic_virtual_text = "coloured",
+      ---Some plugins support highlighting error/warning/info/hint lines, but this
+      ---feature is disabled by default in this colour scheme.
+      diagnostic_line_highlight = false,
+      ---By default, this color scheme won't colour the foreground of |spell|, instead
+      ---colored under curls will be used. If you also want to colour the foreground,
+      ---set this option to `true`.
+      spell_foreground = false,
+      ---Whether to show the EndOfBuffer highlight.
+      show_eob = true,
+      ---Style used to make floating windows stand out from other windows. `"bright"`
+      ---makes the background of these windows lighter than |hl-Normal|, whereas
+      ---`"dim"` makes it darker.
+      ---
+      ---Floating windows include for instance diagnostic pop-ups, scrollable
+      ---documentation windows from completion engines, overlay windows from
+      ---installers, etc.
+      ---
+      ---NB: This is only significant for dark backgrounds as the light palettes
+      ---have the same colour for both values in the switch.
+      float_style = "bright",
+      ---Inlay hints are special markers that are displayed inline with the code to
+      ---provide you with additional information. You can use this option to customize
+      ---the background color of inlay hints.
+      ---
+      ---Options are `"none"` or `"dimmed"`.
+      inlay_hints_background = "none",
+      ---You can override specific highlights to use other groups or a hex colour.
+      ---This function will be called with the highlights and colour palette tables.
+      ---@param highlight_groups Highlights
+      ---@param palette Palette
+      on_highlights = function(highlight_groups, palette) end,
+      ---You can override colours in the palette to use different hex colours.
+      ---This function will be called once the base and background colours have
+      ---been mixed on the palette.
+      ---@param palette Palette
+      colours_override = function(palette) end,
+    })
+<
+
+
+OVERRIDING HIGHLIGHT GROUPS*deus.nvim-deus.nvim-overriding-highlight-groups*
+
+To find all possible palette colours, please see `colours.lua`
+<lua/deus/colours.lua>.
+
+For example, you could override the Diagnostic group of highlights to remove
+the undercurl:
+
+>lua
+    require("deus").setup({
+      on_highlights = function(hl, palette)
+        hl.DiagnosticError = { fg = palette.none, bg = palette.none, sp = palette.red }
+        hl.DiagnosticWarn = { fg = palette.none, bg = palette.none, sp = palette.yellow }
+        hl.DiagnosticInfo = { fg = palette.none, bg = palette.none, sp = palette.blue }
+        hl.DiagnosticHint = { fg = palette.none, bg = palette.none, sp = palette.green }
+      end,
+    })
+<
+
+If you want to tweak or amend an existing highlight group you **need to add the
+colours that aren’t changing as well as your new styles**. This is because
+the highlights defined in the `on_highlights` method will _override_ the
+default highlights.
+
+Here’s an example of adding a **bold** styling to the `TSBoolean` highlight
+group:
+
+>lua
+    require("deus").setup({
+      on_highlights = function(hl, palette)
+        -- The default highlights for TSBoolean is linked to `Purple` which is fg
+        -- purple and bg none. If we want to just add a bold style to the existing,
+        -- we need to have the existing *and* the bold style. (We could link to
+        -- `PurpleBold` here otherwise.)
+        hl.TSBoolean = { fg = palette.purple, bg = palette.none, bold = true }
+      end,
+    })
+<
+
+To clear any highlight groups, simply set them to `{}`
+
+>lua
+    require("deus").setup({
+      on_highlights = function(hl, palette)
+        hl.TSDanger = {}
+      end,
+    })
+<
+
+
+OVERRIDINGCOLOURS IN THE PALETTE*deus.nvim-deus.nvim-overridingcolours-in-the-palette*
+
+To find the existing palette colours, please see `colours.lua`
+<lua/deus/colours.lua>.
+
+For instance, if you use a dark background and want to use a darker hue for
+red, you could use the following configuration:
+
+>lua
+    require("deus").setup({
+      colours_override = function (palette)
+        palette.red = "#b86466"
+      end
+    })
+<
+
+
+PLUGIN SUPPORT                *deus.nvim-deus.nvim-plugin-support*
+
+- ALE <https://github.com/dense-analysis/ale>
+- Barbar <https://github.com/romgrk/barbar.nvim>
+- BufferLine <https://github.com/akinsho/nvim-bufferline.lua>
+- Coc.nvim <https://github.com/neoclide/coc.nvim>
+- Dashboard <https://github.com/glepnir/dashboard-nvim>
+- Git Gutter <https://github.com/airblade/vim-gitgutter>
+- Git Signs <https://github.com/lewis6991/gitsigns.nvim>
+- Hop <https://github.com/phaazon/hop.nvim>
+- Incline.nvim <https://github.com/b0o/incline.nvim>
+- Indent Blankline <https://github.com/lukas-reineke/indent-blankline.nvim>
+- |LSP Diagnostics|
+- LSP Saga <https://github.com/glepnir/lspsaga.nvim>
+- LSP Trouble <https://github.com/folke/lsp-trouble.nvim>
+- Leap <https://github.com/ggandor/leap.nvim>
+- Lualine <https://github.com/hoob3rt/lualine.nvim>
+- Mini <https://github.com/echasnovski/mini.nvim>
+- Neo-tree.nvim <https://github.com/nvim-neo-tree/neo-tree.nvim>
+- Neogit <https://github.com/TimUntersberger/neogit>
+- Neomake <https://github.com/neomake/neomake>
+- Neotest <https://github.com/nvim-neotest/neotest>
+- Noice <https://github.com/folke/noice.nvim>
+- NvimTree <https://github.com/nvim-tree/nvim-tree.lua>
+- Octo.nvim <https://github.com/pwntester/octo.nvim>
+- Scrollbar <https://github.com/petertriho/nvim-scrollbar>
+- Telescope <https://github.com/nvim-telescope/telescope.nvim>
+- TreeSitter <https://github.com/nvim-treesitter/nvim-treesitter>
+- Trouble <https://github.com/folke/trouble.nvim>
+- WhichKey <https://github.com/folke/which-key.nvim>
+- aerial.nvim <https://github.com/stevearc/aerial.nvim>
+- blamer.nvim <https://github.com/APZelos/blamer.nvim>
+- fzf.vim <https://github.com/junegunn/fzf.vim>
+- fsread.nvim <https://github.com/nullchilly/fsread.nvim>
+- lightspeed.nvim <https://github.com/ggandor/lightspeed.nvim>
+- nvim-cmp <https://github.com/hrsh7th/nvim-cmp>
+- nvim-dap-ui <https://github.com/rcarriga/nvim-dap-ui>
+- nvim-navic <https://github.com/SmiteshP/nvim-navic>
+- nvim-notify <https://github.com/rcarriga/nvim-notify>
+- nvim-ts-rainbow <https://github.com/p00f/nvim-ts-rainbow>
+- nvim-ts-rainbow2 <https://github.com/HiPhish/nvim-ts-rainbow2>
+- packer.nvim <https://github.com/wbthomason/packer.nvim>
+- symbols-outline.nvim <https://github.com/simrat39/symbols-outline.nvim>
+- undotree <https://github.com/mbbill/undotree>
+- vim-floaterm <https://github.com/voldikss/vim-floaterm>
+- vim-matchup <https://github.com/andymass/vim-matchup>
+- vim-plug <https://github.com/junegunn/vim-plug>
+- vim-sneak <https://github.com/justinmk/vim-sneak>
+- yanky.nvim <https://github.com/gbprod/yanky.nvim>
+
+See the wiki <https://github.com/genmzy/deus-nvim/wiki> for the full
+list of plugins that have highlights.
+
+
+STILL TODO                        *deus.nvim-deus.nvim-still-todo*
+
+- Colour scheme configuration
+    - `background`
+    - `transparent_background`
+    - `dim_inactive_windows`
+    - `disable_italic_comments`
+    - `enable_italic` — this is `italic` in deus-nvim
+    - _cursor
+    - `sign_column_background`
+    - `spell_foreground`
+    - `ui_contrast`
+    - `show_eob`
+    - `current_word`
+    - `diagnostic_text_highlight`
+    - `diagnostic_line_highlight`
+    - `diagnostic_virtual_text`
+    - `disable_terminal_colours`
+    - `colours_override`
+- Transparent backgrounds
+- Different colour scheme "weights"
+
+
+INSPIRATION                      *deus.nvim-deus.nvim-inspiration*
+
+- deus <https://github.com/sainnhe/deus> (obviously)
+- NeoSolarized.nvim <https://github.com/Tsuzat/NeoSolarized.nvim>
+- Tokyo Night <https://github.com/folke/tokyonight.nvim>
+
+Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
+
+vim:tw=78:ts=8:noet:ft=help:norl:
