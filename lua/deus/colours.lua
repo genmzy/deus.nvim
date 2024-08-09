@@ -36,7 +36,7 @@ local M = {}
 ---@alias PaletteBackgrounds table<Backgrounds, PaletteBackground>
 
 ---@type PaletteBackgrounds
-local hard_background = {
+local soft_background = {
   bg_dim = "#282E37",
   bg0 = "#2C323B",
   bg1 = "#374658",
@@ -50,14 +50,28 @@ local hard_background = {
   bg_yellow = "#fabd2f",
 }
 
+local hard_background = {
+  bg_dim = "#22282E",
+  bg0 = "#242a32",
+  bg1 = "#343F4D",
+  bg2 = "#21252C",
+  bg3 = "#5f575c",
+  bg4 = "#585256",
+  bg5 = "#7c6f64",
+  bg_red = "#fb4934",
+  bg_green = "#98C379",
+  bg_blue = "#83a598",
+  bg_yellow = "#fabd2f",
+}
+
 ---@type table<Backgrounds, PaletteBase>
-local base_palette = {
+local soft_palette = {
   fg = "#ebdbb2",
   red = "#fb4934",
   orange = "#fe8019",
   yellow = "#fabd2f",
-  green = "#98C379",
-  aqua = "#81BE6A",
+  green = "#98c379",
+  aqua = "#81be6a",
   blue = "#83a598",
   purple = "#c678dd",
   grey0 = "#d5c4a1",
@@ -69,15 +83,33 @@ local base_palette = {
   none = "NONE",
 }
 
+local hard_palette = {
+  fg = "#e3d1a3",
+  red = "#fb4934",
+  orange = "#fe8019",
+  yellow = "#fabd2f",
+  green = "#98C379",
+  aqua = "#81be6a",
+  blue = "#83a598",
+  purple = "#c678dd",
+  grey0 = "#d5c4a1",
+  grey1 = "#85796e",
+  grey2 = "#85796e",
+  statusline1 = "#83a598",
+  statusline2 = "#8ec07c",
+  statusline3 = "#fb4934",
+  none = "NONE",
+}
+
 ---Generates the colour palette based on the user's config
 ---@param options Config The package configuration table
 ---@return Palette
 M.generate_palette = function(options)
-  local base = base_palette
+  local base = options.hard and hard_palette or soft_palette
   ---@type PaletteBackground
   local background_palette
 
-  background_palette = hard_background
+  background_palette = options.hard and hard_background or soft_background
 
   ---@type Palette
   local combined_palette = vim.tbl_extend("force", base, background_palette)

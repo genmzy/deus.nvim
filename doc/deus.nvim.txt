@@ -23,14 +23,11 @@ scheme.
   -----------------------------------------------------------------------
                                    Dark                    Light
   ----------------------- ----------------------- -----------------------
-           Hard             [deus colour       [eveforest colour
-                             scheme dark hard]      scheme light hard]
+           Hard             [deus colour          [deus colour
+                             scheme dark hard]       scheme light hard]
 
-     Medium (default)        [eveforest colour      [deus colour
-                            scheme dark medium]    scheme light medium]
-
-           Soft             [deus colour      [deus colour
-                             scheme dark soft]      scheme light soft]
+           Soft             [deus colour          [deus colour
+                             scheme dark soft]       scheme light soft]
   -----------------------------------------------------------------------
 _All screenshots taken from my personal config_
 
@@ -134,9 +131,9 @@ The default configuration used by the colour scheme ~
 
 >lua
     require("deus").setup({
-      ---Controls the "hardness" of the background. Options are "soft", "medium" or "hard".
-      ---Default is "medium".
-      background = "medium",
+      ---Controls the "hardness" of the background.
+      ---Default is false.
+      hard = false,
       ---How much of the background should be transparent. 2 will have more UI
       ---components be transparent (e.g. status line background)
       transparent_background_level = 0,

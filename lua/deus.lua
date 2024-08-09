@@ -5,7 +5,7 @@ local highlights = require("deus.highlights")
 local M = {}
 
 ---@class Config
----@field background "soft" | "medium" | "hard"
+---@field hard true | false
 ---@field transparent_background_level 0 | 1 | 2
 ---@field italics boolean
 ---@field disable_italic_comments boolean
