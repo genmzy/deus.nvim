@@ -2170,13 +2170,9 @@ highlights.generate_syntax = function(palette, options)
     purple = palette.purple,
   }
 
-  if vim.o.background == "dark" then
-    terminal.black = palette.fg
-    terminal.white = palette.bg3
-  else
-    terminal.black = palette.bg3
-    terminal.white = palette.fg
-  end
+  terminal.black = palette.fg
+  terminal.bblack = palette.bg3
+  terminal.white = palette.bg3
 
   -- Consider adding configuration options for this
   vim.g.terminal_color_0 = terminal.black
@@ -2187,7 +2183,7 @@ highlights.generate_syntax = function(palette, options)
   vim.g.terminal_color_5 = terminal.purple
   vim.g.terminal_color_6 = terminal.cyan
   vim.g.terminal_color_7 = terminal.white
-  vim.g.terminal_color_8 = terminal.black
+  vim.g.terminal_color_8 = terminal.bblack
   vim.g.terminal_color_9 = terminal.red
   vim.g.terminal_color_10 = terminal.green
   vim.g.terminal_color_11 = terminal.yellow
