@@ -725,7 +725,7 @@ highlights.generate_syntax = function(palette, options)
     ["@lsp.type.derive"] = { link = "@constructor" },
     ["@lsp.type.deriveHelper"] = { link = "@attribute" },
     ["@lsp.type.enum"] = { link = "@type" },
-    ["@lsp.type.enumMember"] = { link = "@property" },
+    ["@lsp.type.enumMember"] = { link = "@string" },
     ["@lsp.type.escapeSequence"] = { link = "@string.escape" },
     ["@lsp.type.formatSpecifier"] = { link = "@punctuation.special" },
     ["@lsp.type.function"] = { link = "@function" },
