@@ -2102,12 +2102,12 @@ highlights.generate_syntax = function(palette, options)
     syntax["NeoTreeEndOfBuffer"] = syntax_entry(palette.bg_dim, palette.bg_dim)
     syntax["NeoTreeVertSplit"] = syntax_entry(palette.bg0, palette.bg0)
     -- makrdown.nvim
-    syntax["RenderMarkdownH1Bg"] = syntax_entry(palette.fg, palette.bg2)
-    syntax["RenderMarkdownH2Bg"] = syntax_entry(palette.fg, palette.bg_dim)
-    syntax["RenderMarkdownH3Bg"] = syntax_entry(palette.fg, palette.bg1)
-    syntax["RenderMarkdownH4Bg"] = syntax_entry(palette.fg, palette.bg4)
-    syntax["RenderMarkdownH5Bg"] = syntax_entry(palette.fg, palette.bg3)
-    syntax["RenderMarkdownH6Bg"] = syntax_entry(palette.fg, palette.bg5)
+    syntax["RenderMarkdownH1Bg"] = syntax_entry(palette.none, palette.bg2)
+    syntax["RenderMarkdownH2Bg"] = syntax_entry(palette.none, palette.bg_dim)
+    syntax["RenderMarkdownH3Bg"] = syntax_entry(palette.none, palette.bg1)
+    syntax["RenderMarkdownH4Bg"] = syntax_entry(palette.none, palette.bg4)
+    syntax["RenderMarkdownH5Bg"] = syntax_entry(palette.none, palette.bg3)
+    syntax["RenderMarkdownH6Bg"] = syntax_entry(palette.none, palette.bg5)
   end
 
   if options.inlay_hints_background == "none" then
