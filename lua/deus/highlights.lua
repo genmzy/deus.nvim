@@ -532,7 +532,7 @@ highlights.generate_syntax = function(palette, options)
     goTSConstBuiltin = { link = "AquaItalic" },
     htmlTSText = { link = "TSNone" },
     jsonKeyword = { link = "Green" },
-    jsonString = { link = "Fg" },
+    jsonString = { link = "Aqua" },
     jsonQuote = { link = "Grey" },
     jsonTSLabel = { link = "jsonKeyword" },
     jsonTSString = { link = "jsonString" },
