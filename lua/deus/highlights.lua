@@ -333,7 +333,7 @@ highlights.generate_syntax = function(palette, options)
     Function = syntax_entry(palette.green, palette.none),
     String = syntax_entry(palette.green, palette.none),
     Character = syntax_entry(palette.green, palette.none),
-    Constant = syntax_entry(palette.aqua, palette.none),
+    Constant = syntax_entry(palette.purple, palette.none),
     Macro = syntax_entry(palette.aqua, palette.none),
     Identifier = syntax_entry(palette.blue, palette.none),
 
@@ -490,7 +490,7 @@ highlights.generate_syntax = function(palette, options)
     TSModuleInfoGood = { link = "Green" },
     TSModuleInfoBad = { link = "Red" },
     TSNamespace = { link = "YellowItalic" },
-    TSNone = { link = "Fg" },
+    TSNone = { fg = "NONE" },
     TSNumber = { link = "Purple" },
     TSOperator = { link = "Orange" },
     TSParameter = syntax_entry(palette.grey0, palette.none),
@@ -520,7 +520,7 @@ highlights.generate_syntax = function(palette, options)
     TSTypeDefinition = { link = "YellowItalic" },
     TSTypeQualifier = { link = "Orange" },
     TSURI = syntax_entry(palette.blue, palette.none, { styles.underline }),
-    TSVariable = { link = "Fg" },
+    TSVariable = { link = "@none" },
     TSVariableBuiltin = { link = "PurpleItalic" },
 
     javascriptTSInclude = { link = "Purple" },
@@ -1817,6 +1817,9 @@ highlights.generate_syntax = function(palette, options)
     MasonHighlightBlockBoldSecondary = syntax_entry(palette.bg0, palette.yellow, { styles.bold }),
     MasonMuted = syntax_entry(palette.grey0, palette.none),
     MasonMutedBlock = syntax_entry(palette.bg0, palette.grey0),
+
+    -- FzfLua
+    FzfLuaDirPart = syntax_entry(palette.grey1, palette.none),
 
     -- nullchilly/fsread.nvim
     FSPrefix = syntax_entry(palette.fg, transparency_respecting_colour(palette.bg0), { styles.bold }),
